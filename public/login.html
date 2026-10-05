@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Sign in to the Chikitsak care-loop simulation.">
+  <title>Chikitsak · Simulation login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <style>
+    :root{--green:#0d4f46;--mint:#eaf6f0;--paper:#f7f5ef;--ink:#17231f;--muted:#66746f;--line:#dce6e1;--coral:#ff8f72}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif}.shell{width:min(100% - 40px,1160px);margin:auto}.nav{height:78px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;color:var(--green);font-weight:700;text-decoration:none}.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--green);display:grid;place-items:center;color:white;font-size:1.5rem;position:relative}.brand-mark:after{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral);position:absolute;right:5px;top:5px}.overview{color:#52625d;text-decoration:none;font-size:.9rem;font-weight:600}.overview:hover{color:var(--green)}main{min-height:calc(100vh - 78px);display:grid;place-items:center;padding:48px 20px 90px}.login-wrap{width:min(100%,900px);display:grid;grid-template-columns:1.05fr .95fr;border:1px solid rgba(13,79,70,.1);border-radius:30px;overflow:hidden;background:#fff;box-shadow:0 30px 80px rgba(30,61,53,.12)}.context{background:var(--green);color:#fff;padding:55px 48px;display:flex;flex-direction:column;justify-content:space-between;min-height:560px}.eyebrow{font-size:.69rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#a8dfcf}.context h1{font-family:Newsreader,serif;font-size:3.2rem;line-height:.98;font-weight:600;margin:16px 0}.context p{color:#c9dfd8;line-height:1.7;max-width:37ch}.flow{display:grid;gap:12px;margin-top:40px}.flow div{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;font-size:.78rem;color:#d7e8e3}.flow span{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-weight:700}.form-panel{padding:55px 48px;display:flex;flex-direction:column;justify-content:center}.form-panel h2{font-family:Newsreader,serif;font-size:2.25rem;margin:8px 0}.form-panel>p{color:var(--muted);line-height:1.6;margin:0 0 25px}.field{display:grid;gap:7px;margin:14px 0;font-size:.72rem;font-weight:700;color:#4c5c57}.field input{border:1px solid var(--line);border-radius:12px;padding:14px 15px;font:inherit;font-size:.9rem;color:var(--ink);outline:0}.field input:focus{border-color:#4d8c7b;box-shadow:0 0 0 4px rgba(77,140,123,.12)}button{border:0;border-radius:999px;padding:14px 18px;margin-top:20px;background:var(--green);color:#fff;font:700 .87rem "DM Sans",sans-serif;cursor:pointer;box-shadow:0 12px 25px rgba(13,79,70,.18)}button:hover{transform:translateY(-1px)}.demo-credentials{margin-top:24px;border-radius:14px;background:var(--mint);padding:13px 15px;display:grid;gap:5px;color:#36584f;font-size:.75rem}.demo-credentials code{font:700 .78rem ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--green)}.error{min-height:20px;margin:10px 0 0;color:#a63c2d;font-size:.76rem}.fine{margin-top:20px!important;font-size:.68rem;color:#83908c!important}@media(max-width:760px){.login-wrap{grid-template-columns:1fr}.context{min-height:auto;padding:36px 30px}.context h1{font-size:2.5rem}.flow{display:none}.form-panel{padding:38px 30px}.shell{width:min(100% - 26px,1160px)}}
+  </style>
+</head>
+<body>
+  <header class="shell nav"><a class="brand" href="/"><span class="brand-mark">+</span><span>Chikitsak</span></a><a class="overview" href="/">← Back to overview</a></header>
+  <main>
+    <section class="login-wrap" aria-labelledby="loginTitle">
+      <div class="context"><div><span class="eyebrow">Chikitsak · guided prototype</span><h1>Enter the care-loop simulation.</h1><p>Walk through Rajan's post-visit medicine flow, from a Hindi voice note to a verified refill, payment, delivery and family closure.</p></div><div class="flow"><div><span>1</span>Upload and validate the voice note</div><div><span>2</span>Verify the prescription and pharmacy</div><div><span>3</span>Approve, pay, deliver and close</div></div></div>
+      <form class="form-panel" id="demoLogin" novalidate>
+        <span class="eyebrow" style="color:#4d8c7b">Simulation access</span><h2 id="loginTitle">Welcome, Meera.</h2><p>Use the demo account to open Rajan’s active care workspace.</p>
+        <label class="field">User ID<input id="loginId" name="username" autocomplete="username" value="meera" required></label>
+        <label class="field">Password<input id="loginPassword" name="password" type="password" autocomplete="current-password" value="1234" required></label>
+        <div class="error" id="loginError" role="alert" aria-live="polite"></div>
+        <button type="submit">Open simulation <span aria-hidden="true">→</span></button>
+        <div class="demo-credentials"><b>Demo credentials</b><span>ID <code>meera</code> · Password <code>1234</code></span></div>
+        <p class="fine">Prototype access only. These credentials do not protect real patient data.</p>
+      </form>
+    </section>
+  </main>
+  <script>
+    const AUTH_KEY='chikitsak_demo_auth';
+    document.getElementById('demoLogin').addEventListener('submit',event=>{
+      event.preventDefault();
+      const id=document.getElementById('loginId').value.trim();
+      const password=document.getElementById('loginPassword').value;
+      const error=document.getElementById('loginError');
+      if(id==='meera'&&password==='1234'){
+        sessionStorage.setItem(AUTH_KEY,'meera');
+        location.assign('/simulation');
+        return;
+      }
+      error.textContent='That demo ID or password is incorrect.';
+      document.getElementById('loginPassword').focus();
+    });
+  </script>
+</body>
+</html>
