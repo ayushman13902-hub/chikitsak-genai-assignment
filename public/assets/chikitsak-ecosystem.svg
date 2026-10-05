@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Chikitsak family care coordination loop</title>
+  <desc id="desc">A four-step diagram showing update capture, evidence check, family approval and confirmed handoff.</desc>
+  <rect width="960" height="560" rx="40" fill="#f4f0e8"/>
+  <path d="M185 280h150m145 0h145m145 0h65" stroke="#326654" stroke-width="10" stroke-linecap="round" stroke-dasharray="18 18"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g transform="translate(120 280)"><circle r="78" fill="#1f4d40"/><path d="M-25-15h50M-25 5h36M-25 25h44" stroke="#fff" stroke-width="10" stroke-linecap="round"/><text y="120" font-size="24" fill="#173b32">Capture update</text></g>
+    <g transform="translate(405 280)"><circle r="78" fill="#d9a56a"/><path d="M-32 0l20 20 45-50" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><text y="120" font-size="24" fill="#173b32">Check evidence</text></g>
+    <g transform="translate(690 280)"><circle r="78" fill="#8ea79d"/><path d="M-32 5l22 22 48-55" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><text y="120" font-size="24" fill="#173b32">Family approval</text></g>
+    <g transform="translate(860 280)"><circle r="58" fill="#c65d45"/><path d="M-22 0l15 15 34-39" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><text y="100" font-size="22" fill="#173b32">Confirm</text></g>
+    <text x="480" y="80" font-size="38" font-weight="700" fill="#173b32">A visible care loop</text>
+    <text x="480" y="125" font-size="22" fill="#53665f">Every handoff has an owner, evidence and a close condition.</text>
+  </g>
+</svg>
