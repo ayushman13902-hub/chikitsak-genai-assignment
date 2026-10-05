@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chikitsak — Family care, carried through</title>
+  <meta name="description" content="A privacy-first family health agent that preserves what changed, acts within your limits, and follows every care task to closure." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230d4f46'/%3E%3Cpath d='M32 15v34M15 32h34' stroke='%23effaf5' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='18' r='6' fill='%23ff8f72'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --ink:#122420;
+      --muted:#61706c;
+      --paper:#fbfcfa;
+      --soft:#f0f5f2;
+      --line:#dbe5e0;
+      --green:#0d4f46;
+      --green-2:#147267;
+      --mint:#dff4ea;
+      --coral:#ff8f72;
+      --coral-soft:#fff0eb;
+      --blue:#6c8df6;
+      --blue-soft:#e9efff;
+      --lime:#b7d63e;
+      --violet:#9f7aea;
+      --shadow:0 26px 70px rgba(20,55,47,.12);
+      --shadow-sm:0 12px 34px rgba(20,55,47,.09);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif;font-size:16px;line-height:1.55}
+    button,input{font:inherit}
+    a{color:inherit;text-decoration:none}
+    .shell{width:min(1160px,calc(100% - 40px));margin:auto}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(18,36,32,.08)}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.02em}
+    .brand-mark{width:37px;height:37px;border-radius:12px;background:var(--green);display:grid;place-items:center;box-shadow:0 7px 18px rgba(13,79,70,.2)}
+    .brand-mark svg{width:22px;height:22px}
+    .navlinks{display:flex;align-items:center;gap:28px;font-size:.92rem;color:#495a55}
+    .pill,.primary,.secondary{border:0;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-weight:600;transition:.2s ease}
+    .pill{background:var(--green);color:#fff;padding:10px 17px}
+    .pill:hover,.primary:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(13,79,70,.2)}
+    .hero{padding:76px 0 84px;display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-weight:700;font-size:.79rem;text-transform:uppercase;letter-spacing:.1em}
+    .eyebrow:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 5px var(--coral-soft)}
+    h1,h2,h3{margin:0;font-family:"Newsreader",serif;letter-spacing:-.035em;line-height:1.03}
+    h1{font-size:clamp(3.35rem,7vw,6.3rem);max-width:760px;margin-top:21px}
+    .hero h1 em{font-style:normal;color:var(--green)}
+    .hero-copy{font-size:1.13rem;color:var(--muted);max-width:590px;margin:26px 0 32px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .primary{padding:14px 22px;background:var(--green);color:white}
+    .secondary{padding:13px 21px;background:white;border:1px solid var(--line);color:var(--ink)}
+    .secondary:hover{border-color:#aac0b7;background:var(--soft)}
+    .trustline{margin-top:24px;display:flex;gap:20px;flex-wrap:wrap;color:#65736f;font-size:.84rem}
+    .trustline span{display:flex;align-items:center;gap:7px}
+    .check{width:17px;height:17px;border-radius:50%;background:var(--mint);color:var(--green);display:grid;place-items:center;font-size:.7rem;font-weight:800}
+
+    .phone-wrap{position:relative;min-height:560px;display:grid;place-items:center}
+    .phone-glow{position:absolute;width:470px;height:470px;border-radius:50%;background:radial-gradient(circle,var(--mint),transparent 68%);filter:blur(4px)}
+    .phone{position:relative;width:min(360px,90vw);background:#fff;border:1px solid #d9e4df;border-radius:36px;padding:14px;box-shadow:var(--shadow);transform:rotate(2.2deg)}
+    .phone-top{height:31px;display:flex;align-items:center;justify-content:center}.notch{width:82px;height:20px;border-radius:14px;background:#14231f}
+    .app{border-radius:25px;background:#f7faf8;overflow:hidden;border:1px solid #edf2ef}
+    .appbar{padding:20px 19px 16px;display:flex;align-items:center;justify-content:space-between;background:#fff}
+    .profile{display:flex;align-items:center;gap:10px}.avatar{width:39px;height:39px;border-radius:50%;background:var(--mint);display:grid;place-items:center;color:var(--green);font-weight:700}
+    .profile strong{display:block;font-size:.94rem}.profile small{display:block;color:var(--muted);font-size:.72rem}
+    .status-dot{width:9px;height:9px;border-radius:50%;background:#1f9d73;box-shadow:0 0 0 4px #e1f5ed}
+    .appbody{padding:16px}
+    .today{background:var(--green);color:#fff;border-radius:20px;padding:19px;box-shadow:0 15px 30px rgba(13,79,70,.22)}
+    .today-head{display:flex;justify-content:space-between;align-items:flex-start}
+    .today small{color:#bdd8d1}.today h4{margin:6px 0 0;font-size:1.15rem}.due{font-size:.68rem;background:rgba(255,255,255,.14);padding:6px 9px;border-radius:99px}
+    .progress{height:7px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden;margin:18px 0 8px}.progress i{display:block;height:100%;width:72%;background:var(--coral);border-radius:inherit}
+    .today-foot{display:flex;justify-content:space-between;font-size:.71rem;color:#c9ded8}
+    .mini-title{margin:17px 3px 9px;display:flex;justify-content:space-between;font-size:.75rem;font-weight:700;color:#53635e}
+    .event{background:#fff;border:1px solid #e3ebe7;border-radius:15px;padding:12px 13px;display:flex;gap:11px;align-items:flex-start;margin-bottom:9px}
+    .event-icon{width:31px;height:31px;border-radius:10px;display:grid;place-items:center;flex:none;background:var(--blue-soft);color:var(--blue)}
+    .event.coral .event-icon{background:var(--coral-soft);color:#d76146}.event strong{display:block;font-size:.78rem}.event p{margin:2px 0 0;color:var(--muted);font-size:.69rem;line-height:1.4}
+    .floating-note{position:absolute;background:#fff;padding:12px 14px;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm);font-size:.76rem;font-weight:600;display:flex;align-items:center;gap:9px;animation:float 4s ease-in-out infinite}
+    .floating-note.one{left:0;top:106px}.floating-note.two{right:-15px;bottom:85px;animation-delay:-1.7s}.bubble{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:var(--coral-soft)}
+    @keyframes float{50%{transform:translateY(-9px)}}
+
+    .section{padding:100px 0}.section-head{text-align:center;max-width:760px;margin:0 auto 54px}.section-head h2{font-size:clamp(2.7rem,5vw,4.6rem)}.section-head p{color:var(--muted);font-size:1.08rem;margin:18px auto 0;max-width:680px}
+    .loop-section{background:#f3f6f4;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+    .loop-stage{position:relative;min-height:720px;max-width:1070px;margin:0 auto;isolation:isolate}
+    .loop-lines{position:absolute;inset:65px 120px 85px;width:calc(100% - 240px);height:calc(100% - 150px);z-index:-1;opacity:.8}
+    .loop-lines path{fill:none;stroke:#b8cbc4;stroke-width:2;stroke-dasharray:7 8;animation:dash 18s linear infinite}
+    @keyframes dash{to{stroke-dashoffset:-240}}
+    .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotateX(58deg) rotateZ(-42deg);width:225px;height:225px;border-radius:35px;background:linear-gradient(145deg,#fff,#dceae5);box-shadow:-22px 28px 0 #c8dad4,-34px 44px 55px rgba(24,68,59,.2);border:1px solid #d1dfda;display:grid;place-items:center}
+    .core:after{content:"";position:absolute;inset:22px;border-radius:25px;background:var(--green);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+    .core-label{position:relative;z-index:1;transform:rotateZ(42deg) rotateX(-58deg);color:#fff;text-align:center;font-family:"Newsreader",serif;font-size:1.6rem;line-height:1}.core-label span{display:block;font-family:"DM Sans",sans-serif;font-size:.66rem;color:#b9dbd2;margin-top:7px;letter-spacing:.09em;text-transform:uppercase}
+    .node{position:absolute;width:176px;min-height:118px;border-radius:23px;background:#fff;border:1px solid rgba(18,36,32,.09);box-shadow:var(--shadow-sm);padding:17px;cursor:pointer;transition:.25s ease;text-align:left}
+    .node:hover,.node.active{transform:translateY(-7px);box-shadow:0 22px 48px rgba(20,55,47,.15);border-color:#9ec2b6}
+    .node-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;margin-bottom:11px}.node-icon svg{width:20px;height:20px}
+    .node strong{display:block;font-size:.9rem}.node small{display:block;color:var(--muted);font-size:.7rem;line-height:1.35;margin-top:4px}
+    .n1{left:4%;top:8%}.n2{left:39%;top:0}.n3{right:4%;top:10%}.n4{right:0;top:44%}.n5{right:13%;bottom:3%}.n6{left:40%;bottom:0}.n7{left:8%;bottom:5%}.n8{left:0;top:43%}
+    .n1 .node-icon,.n5 .node-icon{background:var(--mint);color:var(--green)}
+    .n2 .node-icon,.n6 .node-icon{background:var(--blue-soft);color:var(--blue)}
+    .n3 .node-icon,.n7 .node-icon{background:var(--coral-soft);color:#d76146}
+    .n4 .node-icon,.n8 .node-icon{background:#f1eafe;color:var(--violet)}
+    .loop-detail{max-width:620px;margin:-10px auto 0;background:white;border:1px solid var(--line);border-radius:18px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;box-shadow:var(--shadow-sm)}
+    .detail-num{width:35px;height:35px;border-radius:11px;background:var(--green);color:white;display:grid;place-items:center;font-weight:700;flex:none}.loop-detail strong{display:block}.loop-detail p{margin:3px 0 0;color:var(--muted);font-size:.87rem}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}.panel{border:1px solid var(--line);border-radius:28px;padding:34px;background:#fff;box-shadow:var(--shadow-sm)}.panel.dark{background:var(--green);color:white;border-color:var(--green)}
+    .panel h3{font-size:2.15rem;margin:12px 0 15px}.panel p{color:var(--muted);margin:0}.panel.dark p{color:#c4ddd6}
+    .tag{display:inline-flex;border-radius:99px;padding:6px 10px;background:var(--mint);color:var(--green);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}.dark .tag{background:rgba(255,255,255,.11);color:#d7ece6}
+    .rule-list{margin:26px 0 0;padding:0;list-style:none;display:grid;gap:12px}.rule-list li{display:flex;gap:11px;align-items:flex-start;padding-top:12px;border-top:1px solid #e4ebe8;font-size:.89rem}.dark .rule-list li{border-color:rgba(255,255,255,.12)}.rule-list b{color:var(--green)}.dark .rule-list b{color:#9fe1cf}
+    .timeline{margin-top:28px;display:grid;gap:0}.timeline-row{display:grid;grid-template-columns:42px 1fr;gap:12px;position:relative;padding-bottom:19px}.timeline-row:not(:last-child):before{content:"";position:absolute;left:20px;top:34px;bottom:0;width:1px;background:#c9d8d2}.tl-dot{width:41px;height:41px;border-radius:13px;background:var(--soft);display:grid;place-items:center;font-weight:700;color:var(--green)}.tl-copy strong{display:block;font-size:.87rem}.tl-copy small{color:var(--muted);font-size:.74rem}
+
+    .reports{background:#122a25;color:#fff;overflow:hidden}.reports-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;align-items:center}.reports h2{font-size:clamp(2.8rem,5vw,4.8rem)}.reports p{color:#b8d0ca;font-size:1.05rem}.report-stack{position:relative;min-height:430px}.sheet-card{position:absolute;width:min(440px,90%);background:#fff;color:var(--ink);border-radius:24px;padding:24px;box-shadow:0 30px 70px rgba(0,0,0,.25);border:1px solid #d8e3de}.sheet-card.back{left:40px;top:35px;transform:rotate(-7deg);opacity:.7}.sheet-card.front{right:0;top:90px;transform:rotate(3deg)}.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:14px}.sheet-head span{font-size:.68rem;color:var(--muted)}.sheet-title{font-family:"Newsreader",serif;font-size:1.35rem}.sheet-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf1ef;font-size:.78rem}.sheet-row em{font-style:normal;color:var(--green);font-weight:700}.sheet-note{margin-top:13px;background:var(--coral-soft);border-radius:11px;padding:11px;font-size:.7rem;color:#804635}
+    .report-points{margin-top:29px;display:grid;gap:13px}.report-point{display:flex;gap:11px;color:#d3e3df}.report-point span{width:24px;height:24px;border-radius:8px;background:rgba(255,255,255,.1);display:grid;place-items:center;flex:none}
+
+    .cta{padding:110px 0}.cta-box{border-radius:35px;background:linear-gradient(135deg,#e0f4eb,#f8fbf9 55%,#fff0eb);padding:65px;text-align:center;border:1px solid #d7e7e0;position:relative;overflow:hidden}.cta-box:before,.cta-box:after{content:"";position:absolute;border-radius:50%;filter:blur(2px)}.cta-box:before{width:180px;height:180px;background:rgba(255,143,114,.15);left:-55px;bottom:-80px}.cta-box:after{width:210px;height:210px;background:rgba(13,79,70,.10);right:-70px;top:-105px}.cta h2{font-size:clamp(2.6rem,5vw,4.5rem);position:relative}.cta p{color:var(--muted);max-width:600px;margin:16px auto 27px;position:relative}.form{display:flex;gap:9px;max-width:520px;margin:auto;position:relative}.form input{flex:1;min-width:0;border:1px solid #cbdcd5;background:#fff;border-radius:999px;padding:14px 18px;color:var(--ink);outline:none}.form input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(13,79,70,.09)}.form button{white-space:nowrap}.form-note{font-size:.72rem;color:#75827e;margin-top:10px}.success{display:none;margin:16px auto 0;background:#fff;border:1px solid #cfe2d9;padding:12px 16px;border-radius:14px;max-width:520px;color:var(--green);font-weight:600}
+    footer{border-top:1px solid var(--line);padding:30px 0 42px}.foot{display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:.78rem}.foot strong{color:var(--ink)}
+    .reveal{opacity:0;transform:translateY(18px);transition:.65s ease}.reveal.visible{opacity:1;transform:none}
+
+    @media (max-width:900px){
+      .navlinks a{display:none}.hero{grid-template-columns:1fr;padding-top:56px}.hero-copy{max-width:670px}.phone-wrap{min-height:520px}.floating-note.one{left:5%}.floating-note.two{right:3%}
+      .loop-stage{min-height:880px;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-top:260px}.core{top:130px}.node{position:relative!important;inset:auto!important;width:auto;min-height:110px}.loop-lines{display:none}.loop-detail{margin-top:24px}
+      .split,.reports-grid{grid-template-columns:1fr}.reports-grid{gap:35px}.report-stack{min-height:410px}.cta-box{padding:52px 28px}
+    }
+    @media (max-width:580px){
+      .shell{width:min(100% - 24px,1160px)}.nav{height:68px}.pill{padding:9px 13px}.hero{padding:46px 0 60px;gap:30px}h1{font-size:3.35rem}.hero-copy{font-size:1rem}.phone-wrap{min-height:505px}.floating-note{display:none}.phone{width:330px;transform:none}
+      .section{padding:74px 0}.section-head{margin-bottom:36px}.section-head h2{font-size:2.75rem}.loop-stage{min-height:auto;padding-top:235px;grid-template-columns:1fr}.core{width:176px;height:176px;top:100px}.loop-detail{align-items:flex-start}.panel{padding:25px}.reports-grid{gap:20px}.report-stack{min-height:345px}.sheet-card{padding:18px}.sheet-card.back{left:10px}.sheet-card.front{top:70px}.form{flex-direction:column}.form .primary{width:100%}.cta-box{padding:45px 20px}.foot{flex-direction:column}.trustline{gap:10px}
+    }
+
+    /* Reference-led editorial + soft isometric hero */
+    body{background:#f7f6f8}
+    header.nav{background:rgba(247,246,248,.86);backdrop-filter:blur(14px);position:relative;z-index:10}
+    .reference-hero{padding:74px 0 92px;background:radial-gradient(circle at 50% 47%,#fff 0,#f7f6f9 56%,#efedf2 100%);border-bottom:1px solid rgba(58,54,68,.08);overflow:hidden}
+    .reference-head{text-align:center;max-width:900px;margin:auto;position:relative;z-index:2}
+    .reference-head .eyebrow{justify-content:center;color:#4d5965}
+    .reference-head h1{font-size:clamp(3.55rem,7.1vw,6.8rem);font-weight:500;letter-spacing:-.045em;line-height:.96;margin:22px 0 24px;color:#17171a}
+    .reference-head p{font-size:clamp(1rem,1.6vw,1.28rem);max-width:780px;margin:0 auto;color:#5d6570;line-height:1.55}
+    .hero-actions{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:26px;position:relative;z-index:8}.sim-launch{text-decoration:none;padding:14px 21px;background:var(--green);color:#fff;border-radius:999px;display:inline-flex;align-items:center;gap:9px;font-size:.85rem;font-weight:700;box-shadow:0 13px 30px rgba(13,79,70,.2);transition:.2s ease}.sim-launch:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(13,79,70,.27)}.sim-launch i{width:8px;height:8px;border-radius:50%;background:#75e0b6;box-shadow:0 0 0 5px rgba(117,224,182,.16);animation:livePulse 1.7s ease-in-out infinite}.sim-note{font-size:.72rem!important;color:#7a8380!important;margin:0!important}.sim-note strong{color:var(--green)}@keyframes livePulse{50%{box-shadow:0 0 0 9px rgba(117,224,182,0)}}
+    .ecosystem-wrap{width:min(1440px,100%);margin:24px auto 0;position:relative;aspect-ratio:1.68/1}
+    .ecosystem-wrap:before{content:"";position:absolute;inset:3% 4%;background:radial-gradient(ellipse at center,rgba(255,255,255,.14),rgba(247,246,248,.04) 55%,#f7f6f8 78%);z-index:1;pointer-events:none}
+    .ecosystem-wrap img{width:100%;height:100%;object-fit:contain;display:block;mix-blend-mode:multiply;filter:saturate(.9) contrast(.98)}
+    .ecosystem-wrap img{animation:ecosystemBreath 7s ease-in-out infinite;transform-origin:center 58%}
+    @keyframes ecosystemBreath{0%,100%{transform:scale(1);filter:saturate(.9) contrast(.98) brightness(1)}50%{transform:scale(1.008);filter:saturate(.96) contrast(.99) brightness(1.018)}}
+    .centre-card{position:absolute;z-index:6;left:50%;top:53%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:11px;min-width:190px;padding:13px 17px;border-radius:16px;background:rgba(255,255,255,.94);border:1px solid rgba(49,64,60,.17);box-shadow:0 18px 42px rgba(40,48,49,.16);backdrop-filter:blur(12px);color:#31403c;animation:hubPulse 3.2s ease-in-out infinite}
+    .centre-card:after{content:"";position:absolute;inset:-7px;border:1px solid rgba(13,79,70,.15);border-radius:21px;opacity:.45;animation:hubRing 3.2s ease-out infinite}
+    .centre-mark{width:34px;height:34px;border-radius:11px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:1.45rem;font-weight:500;line-height:1;box-shadow:0 7px 16px rgba(13,79,70,.22)}
+    .centre-card strong{font-family:"Newsreader",serif;font-size:1.42rem;letter-spacing:-.035em;display:block;line-height:1}
+    .centre-card small{text-transform:uppercase;font-size:.53rem;letter-spacing:.105em;color:#6f7a76;display:block;margin-top:5px}
+    @keyframes hubPulse{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-5px);box-shadow:0 24px 52px rgba(40,48,49,.2)}}
+    @keyframes hubRing{0%{transform:scale(.98);opacity:.55}65%,100%{transform:scale(1.09);opacity:0}}
+    .module-label{position:absolute;z-index:4;border:1px solid rgba(80,84,92,.12);background:rgba(255,255,255,.86);backdrop-filter:blur(10px);box-shadow:0 12px 30px rgba(60,57,72,.09);border-radius:12px;padding:9px 12px;text-align:left;color:#2f343b;cursor:pointer;transition:width .25s ease,padding .25s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease;min-width:145px;max-width:150px;animation:moduleIdle 4.8s ease-in-out infinite;animation-delay:calc(var(--step,0) * -.43s);transform-origin:center}
+    .module-label:before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;border:2px solid #97a7a1;top:50%;transform:translateY(-50%)}
+    .module-label:hover,.module-label:focus-visible{z-index:12;max-width:245px;width:245px;padding:14px 16px;background:#fff;box-shadow:0 25px 58px rgba(48,51,61,.21);border-color:rgba(39,98,84,.4);animation:moduleAlive .8s ease-in-out infinite alternate;outline:none}
+    .module-label.active:not(:hover){background:#fff;box-shadow:0 18px 42px rgba(60,57,72,.16);border-color:rgba(39,98,84,.32);animation:moduleActive 2.1s ease-in-out infinite}
+    .module-label.active:before{background:var(--green);border-color:#c5e6dd;box-shadow:0 0 0 4px rgba(13,79,70,.10)}
+    .module-label>span:not(.step-cue){font-weight:700;font-size:.78rem;display:block;line-height:1.2}.module-label small{display:block;color:#7a8088;font-size:.62rem;margin-top:3px;line-height:1.25}
+    .module-explain{max-height:0;opacity:0;overflow:hidden;margin:0;color:#5e666d;font-size:.7rem;line-height:1.42;transition:max-height .25s ease,opacity .22s ease,margin .25s ease}
+    .module-label:hover .module-explain,.module-label:focus-visible .module-explain{max-height:90px;opacity:1;margin-top:10px;padding-top:9px;border-top:1px solid #e7ecea}
+    .step-cue{position:absolute!important;right:8px;top:8px;display:flex!important;align-items:center;gap:4px;font-size:.58rem!important;color:#8d9693;font-weight:600!important}
+    .step-cue b{width:19px;height:19px;border-radius:7px;background:#edf2f0;color:var(--green);display:grid;place-items:center;font-size:.62rem}.step-cue i{font-style:normal;animation:cueNudge 1.4s ease-in-out infinite}
+    .module-label>span:not(.step-cue){padding-right:33px}
+    @keyframes moduleIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes moduleActive{0%,100%{transform:translateY(-2px) scale(1)}50%{transform:translateY(-7px) scale(1.025)}}
+    @keyframes moduleAlive{from{transform:translateY(-7px) scale(1.04)}to{transform:translateY(-11px) scale(1.065)}}
+    @keyframes cueNudge{0%,100%{transform:translateX(0);opacity:.55}50%{transform:translateX(3px);opacity:1}}
+    .m-chat{--step:1;left:26%;top:20%}.m-chat:before,.m-vault:before,.m-instruction:before,.m-voice:before{left:-6px}
+    .m-vault{--step:2;left:55%;top:18%}.m-instruction{--step:3;right:4%;top:34%}.m-voice{--step:4;right:2%;top:67%}
+    .m-pharmacy{--step:5;right:19%;bottom:3%}.m-pharmacy:before,.m-payment:before,.m-delivery:before,.m-home:before{right:-6px}
+    .m-payment{--step:6;left:31%;bottom:1%}.m-delivery{--step:7;left:3%;bottom:20%}.m-home{--step:8;left:2%;top:35%}
+    .ecosystem-detail{margin:-15px auto 56px;position:relative;z-index:5;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);max-width:700px}
+    .flow-nudge{width:min(760px,calc(100% - 30px));margin:-8px auto 25px;padding:10px 14px;border:1px solid rgba(74,78,84,.12);border-radius:999px;background:rgba(255,255,255,.76);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;gap:17px;color:#747b80;box-shadow:0 12px 30px rgba(61,57,71,.07);position:relative;z-index:6}
+    .flow-title,.flow-hint{font-size:.68rem;font-weight:600;white-space:nowrap}.flow-hint{font-weight:400;color:#92989c}
+    .flow-steps{display:flex;align-items:center;gap:6px}.flow-steps button{border:0;width:25px;height:25px;border-radius:8px;background:#edf1ef;color:#68736f;font-size:.68rem;font-weight:700;cursor:pointer;transition:.2s ease}.flow-steps button:hover,.flow-steps button.active{background:var(--green);color:#fff;transform:translateY(-2px);box-shadow:0 6px 12px rgba(13,79,70,.2)}.flow-steps i{font-style:normal;color:#a1aaa7;font-size:.85rem;animation:cueNudge 1.5s ease-in-out infinite}
+    .care-principles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#d9d7de;border:1px solid #d9d7de;border-radius:22px;overflow:hidden;box-shadow:0 18px 45px rgba(47,44,55,.08)}
+    .care-principles>div{background:rgba(255,255,255,.76);padding:24px}.care-principles span{display:block;color:#89908f;font-size:.7rem;letter-spacing:.08em}.care-principles strong{display:block;font-family:"Newsreader",serif;font-size:1.6rem;margin:5px 0 6px}.care-principles p{margin:0;color:#6b7278;font-size:.79rem;line-height:1.45}
+    #safety{background:#fbfbfa;width:100%;max-width:none;padding-left:max(20px,calc((100% - 1160px)/2));padding-right:max(20px,calc((100% - 1160px)/2))}
+    @media(max-width:1000px){
+      .ecosystem-wrap{aspect-ratio:1.35/1;margin-top:5px}.module-label{min-width:132px;padding:8px 10px}.m-chat{left:21%;top:18%}.m-vault{left:55%;top:15%}.m-instruction{right:1%;top:32%}.m-voice{right:0;top:67%}.m-pharmacy{right:14%;bottom:1%}.m-payment{left:28%;bottom:0}.m-delivery{left:0;bottom:17%}.m-home{left:0;top:33%}
+      .care-principles{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:700px){
+      .reference-hero{padding-top:48px}.reference-head h1{font-size:3.35rem}.reference-head p{font-size:.97rem;padding:0 8px}
+      .hero-actions{flex-direction:column;gap:9px;margin-top:22px}
+      .ecosystem-wrap{aspect-ratio:auto;margin:18px auto 0;padding-bottom:0}.ecosystem-wrap img{height:auto;min-height:390px;object-fit:cover;object-position:center}.ecosystem-wrap:before{display:none}.centre-card{top:49%;min-width:152px;padding:10px 12px;gap:8px}.centre-mark{width:29px;height:29px}.centre-card strong{font-size:1.05rem}.centre-card small{font-size:.42rem}
+      .module-label{display:none}.flow-nudge{border-radius:18px;flex-direction:column;gap:8px;margin-top:12px}.flow-steps{max-width:100%;overflow-x:auto;padding:2px}.flow-hint{display:none}.ecosystem-detail{margin:0 12px 34px}.care-principles{grid-template-columns:1fr 1fr;margin-top:24px}.care-principles>div{padding:19px}
+    }
+    @media(max-width:430px){.reference-head h1{font-size:2.9rem}.ecosystem-wrap img{min-height:330px}.care-principles{grid-template-columns:1fr}.care-principles>div{padding:18px 20px}}
+    @media(prefers-reduced-motion:reduce){.ecosystem-wrap img,.centre-card,.centre-card:after,.module-label,.step-cue i,.flow-steps i{animation:none!important}.module-label,.module-explain,.flow-steps button{transition:none!important}}
+  
+ .week-demo{padding:68px 0}.week-box{border:1px solid var(--line);border-radius:24px;padding:32px;background:white}.week-box h2{font-family:Newsreader,Georgia,serif;font-size:clamp(30px,4vw,44px);margin:0 0 16px}.week-box p{font-size:16px;line-height:1.6}.routine-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin:20px 0}.routine-row label{font-size:14px;font-weight:600}.routine-row select{display:block;width:100%;margin-top:8px;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;min-height:44px}.week-actions{display:flex;gap:12px;flex-wrap:wrap}.week-actions button{min-height:46px;font:inherit;padding:12px 20px;border-radius:10px;border:1px solid var(--green);cursor:pointer}.week-actions button:disabled{opacity:.55}.week-result{padding-left:22px;line-height:1.7;font-size:16px}.week-status{min-height:28px;margin-top:20px}.week-stats{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}.launch-copy{max-width:780px;margin:48px auto;padding:0 20px}.launch-copy p{font-size:18px;line-height:1.6}@media(max-width:650px){.routine-row{grid-template-columns:1fr}.week-box{padding:20px}.week-demo{padding:36px 0}}
+
+</style>
+</head>
+<body>
+  <header class="shell nav">
+    <a href="#top" class="brand" aria-label="Chikitsak home">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16M4 12h16" stroke="white" stroke-width="3.1" stroke-linecap="round"/><circle cx="18" cy="6" r="2.5" fill="#ff8f72"/></svg></span>
+      <span>Chikitsak</span>
+    </a>
+    <nav class="navlinks" aria-label="Primary navigation">
+      <a href="#how">How it works</a><a href="#safety">Safety</a><a href="#reports">Reports</a><a href="/login">Simulation</a>
+      <a href="#join" class="pill">Join the pilot</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="reference-hero" id="how">
+      <div class="shell reference-head reveal">
+        <span class="eyebrow">A privacy-first family health agent</span>
+        <h1>How Chikitsak closes<br>the care loop</h1>
+        <p>Built around one promise: every authorised care task stays open until the medicine, report, appointment outcome or refund actually reaches the family.</p>
+<div class="hero-actions"><a class="sim-launch" href="/login"><i></i>Explore the care-loop simulation <span aria-hidden="true">→</span></a><p class="sim-note"><strong>Prototype:</strong> external voice, pharmacy, payment and delivery rails are scripted, not connected</p></div>
+      </div>
+
+      <div class="ecosystem-wrap reveal">
+<img src="assets/chikitsak-ecosystem.svg" alt="A diagram of the proposed Chikitsak care loop across update capture, evidence checks, family approval and confirmed handoff." />
+        <div class="centre-card" aria-label="Chikitsak, the care orchestrator"><span class="centre-mark">+</span><div><strong>Chikitsak</strong><small>Private care orchestrator</small></div></div>
+
+        <button class="module-label m-chat active" data-step="1" data-title="A real need arrives" data-copy="A caregiver sends a prescription, stock update or exception through WhatsApp. The original source stays attached."><span class="step-cue"><b>1</b><i>→</i></span><span>Caregiver WhatsApp</span><small>Real inputs and approvals</small><p class="module-explain">A prescription, stock update or exception enters as a real, timestamped family message.</p></button>
+        <button class="module-label m-vault" data-step="2" data-title="Confidential context stays local" data-copy="Prescriptions, reports, reasons and permissions remain in the family’s encrypted vault. Only a minimum task packet leaves."><span class="step-cue"><b>2</b><i>→</i></span><span>Secure health vault</span><small>Local-first and encrypted</small><p class="module-explain">The full record stays on-device while the agent retrieves the relevant history and permissions.</p></button>
+        <button class="module-label m-instruction" data-step="3" data-title="Only settled instructions can move" data-copy="Confirmed instructions proceed. Trial, stale or conflicting instructions stop and return to the caregiver."><span class="step-cue"><b>3</b><i>→</i></span><span>Confirmed instructions</span><small>Source, reason and certainty</small><p class="module-explain">The agent checks whether the instruction is confirmed, current and inside its authorised scope.</p></button>
+        <button class="module-label m-voice" data-step="4" data-title="Providers receive a minimum brief" data-copy="Gnani contacts a clinic or pharmacy with only the information approved for that specific call."><span class="step-cue"><b>4</b><i>→</i></span><span>Provider voice</span><small>Gnani calls and records</small><p class="module-explain">Gnani receives only the minimum approved brief, then returns the call outcome verbatim.</p></button>
+        <button class="module-label m-pharmacy" data-step="5" data-title="A licensed pharmacy dispenses" data-copy="The prescription is validated. Any proposed substitution returns to the family before the order continues."><span class="step-cue"><b>5</b><i>→</i></span><span>Licensed pharmacy</span><small>Exact medicine, verified</small><p class="module-explain">A pharmacist validates the prescription; substitutions cannot pass silently through the loop.</p></button>
+        <button class="module-label m-payment" data-step="6" data-title="Payment stays inside the mandate" data-copy="Pine Labs handles the transaction only after the provider, amount and task conditions pass the local check."><span class="step-cue"><b>6</b><i>→</i></span><span>Mandated payment</span><small>Pine Labs and reconciliation</small><p class="module-explain">The named provider and amount must match the family’s limits before payment can proceed.</p></button>
+        <button class="module-label m-delivery" data-step="7" data-title="Delivery does not equal closure" data-copy="Delhivery moves and tracks the order, but Chikitsak keeps the task open until the household confirms receipt."><span class="step-cue"><b>7</b><i>→</i></span><span>Medicine delivery</span><small>Delhivery tracks the parcel</small><p class="module-explain">Shipment events update the task, but a courier’s “delivered” status does not close it.</p></button>
+        <button class="module-label m-home" data-step="8" data-title="The family confirms the outcome" data-copy="Someone at home confirms receipt. Chikitsak then closes the task and updates the caregiver handover and reports."><span class="step-cue"><b>8</b><i>↺</i></span><span>Received at home</span><small>Closure, reports and handover</small><p class="module-explain">A household confirmation closes the task and refreshes the reports and caregiver handover.</p></button>
+      </div>
+
+      <div class="flow-nudge reveal" aria-label="Care loop sequence">
+        <span class="flow-title">Follow the loop</span>
+        <div class="flow-steps">
+          <button data-go="1" class="active">1</button><i>›</i><button data-go="2">2</button><i>›</i><button data-go="3">3</button><i>›</i><button data-go="4">4</button><i>›</i><button data-go="5">5</button><i>›</i><button data-go="6">6</button><i>›</i><button data-go="7">7</button><i>›</i><button data-go="8">8</button><i>↺</i>
+        </div>
+        <span class="flow-hint">Hover or tap a step</span>
+      </div>
+
+      <div class="loop-detail ecosystem-detail reveal" aria-live="polite"><span class="detail-num" id="detailNum">1</span><div><strong id="detailTitle">A real need arrives</strong><p id="detailCopy">A caregiver sends a prescription, stock update or exception through WhatsApp. The original source stays attached.</p></div></div>
+
+      <div class="shell care-principles reveal">
+        <div><span>01</span><strong>Know</strong><p>Preserve what changed, who changed it and why.</p></div>
+        <div><span>02</span><strong>Check</strong><p>Verify certainty, consent, budget and data scope.</p></div>
+        <div><span>03</span><strong>Act</strong><p>Use the right rail without making clinical choices.</p></div>
+        <div><span>04</span><strong>Close</strong><p>Finish only when the outcome reaches the family.</p></div>
+      </div>
+    </section>
+
+    <section class="section shell" id="safety">
+      <div class="section-head reveal"><span class="eyebrow">Autonomy with a boundary</span><h2>It moves routine care forward—and stops where judgment begins.</h2></div>
+      <div class="split">
+        <article class="panel reveal"><span class="tag">Acts independently</span><h3>Within the family’s mandate</h3><p>Chikitsak handles repetitive, reversible work when the underlying instruction is confirmed.</p><ul class="rule-list"><li><b>01</b><span>Refill the exact prescribed medicine within a preset budget.</span></li><li><b>02</b><span>Book the same doctor inside the prescribed follow-up window.</span></li><li><b>03</b><span>Track delivery, payment and refunds until the result arrives.</span></li></ul></article>
+        <article class="panel dark reveal"><span class="tag">Always asks</span><h3>When care could materially change</h3><p>The agent can prepare the decision, but the family or doctor makes it.</p><ul class="rule-list"><li><b>01</b><span>Medicine substitution, dosage change or conflicting instruction.</span></li><li><b>02</b><span>A new provider, higher spend or wider information disclosure.</span></li><li><b>03</b><span>Anything marked trial, provisional, stale or unclear.</span></li></ul></article>
+      </div>
+      <div class="split" style="margin-top:28px">
+        <article class="panel reveal"><span class="tag">Append-only memory</span><h3>Every change keeps its reason</h3><p>Current instructions make sense only when the history behind them survives.</p><div class="timeline"><div class="timeline-row"><div class="tl-dot">10</div><div class="tl-copy"><strong>Atorvastatin 10 mg nightly confirmed</strong><small>Dr Kavita Sharma · Prescription · 12 Jun</small></div></div><div class="timeline-row"><div class="tl-dot">?</div><div class="tl-copy"><strong>Rajan reports a possible dose change</strong><small>WhatsApp · 4 Oct · held as unverified</small></div></div><div class="timeline-row"><div class="tl-dot">20</div><div class="tl-copy"><strong>20 mg confirmed from the new prescription</strong><small>Dr Kavita Sharma · one tablet nightly · 4 Oct</small></div></div></div></article>
+        <article class="panel reveal"><span class="tag">Local-first privacy</span><h3>The whole record never travels</h3><p>A small model handles identifiable records locally. Larger services receive only the redacted packet required for one task.</p><ul class="rule-list"><li><b>On device</b><span>Reports, prescriptions, longitudinal history and family permissions.</span></li><li><b>Outside</b><span>Medicine, strength, quantity, provider and task-specific authority.</span></li><li><b>Never</b><span>The family’s complete record, unrelated conditions or open-ended consent.</span></li></ul></article>
+      </div>
+    </section>
+
+    <section class="section reports" id="reports">
+      <div class="shell reports-grid">
+        <div class="reveal"><span class="eyebrow" style="color:#b7eadc">Reports and handovers</span><h2>When someone else takes over, the context goes with them.</h2><p>Chikitsak turns the family’s care history into a concise doctor summary, a task-specific insurance packet or a caregiver handover—without overwriting the underlying record.</p><div class="report-points"><div class="report-point"><span>✓</span><div><strong>Doctor summary</strong><br><small>Current treatment, recent changes and unresolved questions</small></div></div><div class="report-point"><span>✓</span><div><strong>Caregiver handover</strong><br><small>What changed, why it changed and what remains open</small></div></div><div class="report-point"><span>✓</span><div><strong>Claim packet</strong><br><small>Only family-approved documents relevant to that claim</small></div></div></div></div>
+        <div class="report-stack reveal" aria-label="Rajan Mehta example reports"><div class="sheet-card back"><div class="sheet-head"><div><span>MEERA’S CAREGIVER HANDOVER</span><div class="sheet-title">Rajan’s open care items</div></div><strong>02</strong></div><div class="sheet-row"><span>Atorvastatin 20 mg refill</span><em>In progress</em></div><div class="sheet-row"><span>Repeat cholesterol test</span><em>Due 4 Dec</em></div><div class="sheet-row"><span>Insulin glargine refill</span><em>Closed autonomously</em></div></div><div class="sheet-card front"><div class="sheet-head"><div><span>DR KAVITA SHARMA · SUMMARY</span><div class="sheet-title">Rajan’s medication change</div></div><span>4 Oct 2026</span></div><div class="sheet-row"><span>Current confirmed dose</span><em>Atorvastatin 20 mg nightly</em></div><div class="sheet-row"><span>Previous confirmed dose</span><em>10 mg nightly</em></div><div class="sheet-row"><span>Follow-up</span><em>Repeat test in 2 months</em></div><div class="sheet-note">Rajan’s original voice note remains attached; the signed prescription is the authority for the changed strength.</div></div></div>
+      </div>
+    </section>
+
+
+ <section class="week-demo shell" id="try-week"><div class="week-box"><p class="eyebrow">TRY CHIKITSAK FREE</p><h2>Set up the week together.</h2><p>Choose up to three routines your family has already agreed. Chikitsak shares reminders between family members A and B. You can review the checklist together.</p><p style="font-size:14px;color:var(--muted)">Use task categories only. Do not enter names, symptoms, medicine names or doses. This is a coordination prototype.</p><form id="weekForm"><div id="routineRows"></div><div class="week-actions"><button type="button" id="addRoutine">Add another routine</button><button class="primary" id="createWeek" type="submit">Create my weekly checklist</button></div></form><p id="weekNotice" class="week-status" role="status" aria-live="polite"></p><ul id="weekResult" class="week-result"></ul><p id="weekStats" class="week-stats" aria-live="polite">Loading live usage…</p><p style="font-size:14px;color:var(--muted)">Three requests per visitor each day. Routine categories and generated assignments are saved to measure use. No clinical information is requested.</p></div></section>
+ <section class="launch-copy"><p>One parent. Two cities. A routine held together by scattered messages.</p><p>Chikitsak helps families share the work of care. Start with a weekly checklist, agree who owns each reminder, and see what still needs attention. The prototype turns routines your family has already agreed into reminders split between two family members. It keeps the frequency and time you enter.</p><p>Chikitsak does not advise on symptoms, medicines or doses. The wider care-fulfilment journey is shown as a simulation.</p><p>Try the weekly planner free. Which recurring task creates the most follow-up messages in your family?</p></section>
+
+    <section class="cta shell" id="join"><div class="cta-box reveal"><h2>Your family already manages care.<br>Chikitsak helps them carry it through.</h2><p>Join the early pilot for families coordinating recurring medicines, reports and follow-ups across people and cities.</p><form class="form" id="pilotForm"><label for="email" style="position:absolute;left:-9999px">Email address</label><input id="email" type="email" required placeholder="Email address" autocomplete="email"><button class="primary" type="submit">Join the pilot</button></form><div class="form-note">Prototype interest form · Saved in this browser only · No medical advice</div><div class="success" id="success">Your interest is saved in this browser for this prototype. It has not been sent to a team or mailing list.</div></div></section>
+  </main>
+  <footer><div class="shell foot"><span><strong>Chikitsak</strong> · Family care, carried through.</span><span>Designed for autonomy without clinical overreach.</span></div></footer>
+
+  <script>
+    const nodes=[...document.querySelectorAll('.module-label')];
+    const flowButtons=[...document.querySelectorAll('.flow-steps button')];
+    const ecosystem=document.querySelector('.ecosystem-wrap');
+    const detailNum=document.getElementById('detailNum');
+    const detailTitle=document.getElementById('detailTitle');
+    const detailCopy=document.getElementById('detailCopy');
+    let activeStep=1;
+    let paused=false;
+    const activateStep=step=>{
+      const node=nodes.find(n=>Number(n.dataset.step)===Number(step));
+      if(!node)return;
+      activeStep=Number(step);
+      nodes.forEach(n=>n.classList.toggle('active',n===node));
+      flowButtons.forEach(button=>button.classList.toggle('active',Number(button.dataset.go)===activeStep));
+      detailNum.textContent=node.dataset.step;detailTitle.textContent=node.dataset.title;detailCopy.textContent=node.dataset.copy;
+    };
+    nodes.forEach(node=>{
+      node.addEventListener('click',()=>activateStep(node.dataset.step));
+      node.addEventListener('mouseenter',()=>{paused=true;activateStep(node.dataset.step)});
+      node.addEventListener('mouseleave',()=>{paused=false});
+      node.addEventListener('focus',()=>{paused=true;activateStep(node.dataset.step)});
+      node.addEventListener('blur',()=>{paused=false});
+    });
+    flowButtons.forEach(button=>{
+      button.setAttribute('aria-label',`Show step ${button.dataset.go}`);
+      button.addEventListener('click',()=>activateStep(button.dataset.go));
+      button.addEventListener('mouseenter',()=>{paused=true;activateStep(button.dataset.go)});
+      button.addEventListener('mouseleave',()=>{paused=false});
+      button.addEventListener('focus',()=>{paused=true;activateStep(button.dataset.go)});
+      button.addEventListener('blur',()=>{paused=false});
+    });
+    ecosystem.addEventListener('mouseenter',()=>{paused=true});
+    ecosystem.addEventListener('mouseleave',()=>{paused=false});
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      window.setInterval(()=>{if(!paused)activateStep(activeStep%nodes.length+1)},2800);
+    }
+    const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    document.getElementById('pilotForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      const email=document.getElementById('email').value.trim();
+      if(!email)return;
+      localStorage.setItem('chikitsak_pilot_interest',email);
+      e.currentTarget.style.display='none';document.getElementById('success').style.display='block';
+    });
+  </script>
+<script src="/week.js" defer></script>
+</body>
+</html>
